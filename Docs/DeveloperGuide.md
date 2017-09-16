@@ -17,3 +17,8 @@ Since git does not support viewing parts of a .unity (scene) file, it is hard to
 # How to do things
 
 To make something respond to a touch, you can add an Event Trigger or a Button component. Using Event Trigger, add a New Event Type, select the current object you want to call a function on, then choose a function to call from the scripts in the object. Note that the function to be called must be public.
+ALWAYS set scale mode to "scale with screen size" whenever possible (usually in Canvas for UI elements)
+
+# Testing the game on Android
+
+Follow steps in this link https://unity3d.com/learn/tutorials/topics/mobile-touch/building-your-unity-game-android-device-testing
