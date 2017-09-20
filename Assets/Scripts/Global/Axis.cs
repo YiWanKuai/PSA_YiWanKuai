@@ -3,14 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class Axis : MonoBehaviour {
-
-	// Use this for initialization
-	void Start () {
-		
-	}
-	
-	// Update is called once per frame
-	void Update () {
-		
-	}
+    private static float rawAngle = 15f;
+    private static float convertToRad = 0.0174533f;
+    public static Vector2 axis = new Vector2(Mathf.Cos(rawAngle * convertToRad), Mathf.Sin(-rawAngle * convertToRad));
 }
