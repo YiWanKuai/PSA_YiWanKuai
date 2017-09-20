@@ -13,10 +13,7 @@ public class Pause : MonoBehaviour {
 	public void TogglePauseGame () {
 
         gameManager = GameObject.FindGameObjectWithTag("GameController").GetComponent<GameManager>();
-        if (gameManager == null) {
-            Debug.Log("canot find gameManager script");
-        }
-        if (gameManager.Unpaused()) {
+        if (!gameManager.isCleared && !gameManager.isTimeUp) {
             gameManager.isPaused = !gameManager.isPaused;
         }
 	}

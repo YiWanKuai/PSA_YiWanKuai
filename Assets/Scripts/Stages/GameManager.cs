@@ -26,7 +26,6 @@ public class GameManager : MonoBehaviour {
     public IEnumerator StartCountdown() {
         while (!isTimeUp) {
             if (!isPaused && !isCleared) {
-                Debug.Log("Countdown: " + timeLeft);
                 yield return new WaitForSeconds(1.0f);
                 timeLeft--;
             }

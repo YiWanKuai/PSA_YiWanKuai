@@ -21,11 +21,15 @@ public class ShipController : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
         if (gameManager.Unpaused()) {
+            anim.enabled = true; 
             if (toTheLeft) {
                 rb.velocity = -moveSpeed * Axis.axis;
             } else {
                 rb.velocity = moveSpeed * Axis.axis;
             }
+        } else {
+            rb.velocity = Vector2.zero;
+            anim.enabled = false;
         }
 	}
 
