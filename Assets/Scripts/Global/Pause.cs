@@ -14,6 +14,12 @@ public class Pause : MonoBehaviour {
 
         gameManager = GameObject.FindGameObjectWithTag("GameController").GetComponent<GameManager>();
         if (!gameManager.isCleared && !gameManager.isTimeUp) {
+            if (gameManager.isPaused) {
+                Time.timeScale = 1f;
+            }
+            else {
+                Time.timeScale = 0f;
+            }
             gameManager.isPaused = !gameManager.isPaused;
         }
 	}

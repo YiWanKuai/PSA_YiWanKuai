@@ -16,7 +16,7 @@ public class ShipTimer : MonoBehaviour {
 	}
 	
 	IEnumerator KillItself() {
-        yield return new WaitForSeconds(time);
+        yield return new WaitForSeconds(time + 0.2f);
         Destroy(gameObject);
     }
 
