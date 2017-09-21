@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Audio;
 
 public class MusicManager : MonoBehaviour {
 
@@ -8,6 +9,8 @@ public class MusicManager : MonoBehaviour {
     private AudioSource BGM;
     private AudioSource clearClip;
     private AudioSource loseClip;
+
+    public AudioMixer mixer;
 
 	// Use this for initialization
 	void Start () {
@@ -20,6 +23,8 @@ public class MusicManager : MonoBehaviour {
             clearClip = audioSources[2];
         }
         BGM.Play();
+        mixer.SetFloat("BGMVol", PlayerPrefs.GetFloat("BGMVol"));
+        mixer.SetFloat("SFXVol", PlayerPrefs.GetFloat("SFXVol"));
 	}
 	
 	public void playLose () {
