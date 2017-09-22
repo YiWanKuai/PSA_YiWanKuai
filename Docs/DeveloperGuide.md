@@ -1,9 +1,3 @@
-# Folders
-
-Materials folder is for .mat files. <br>
-Models folder is for 3D objects (.blend etc). <br>
-2D images go into Sprites.
-
 # Setting up
 
 Clone this repo (forking to your own is optional) into your local drive. <br>

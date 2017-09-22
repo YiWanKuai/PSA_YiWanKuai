@@ -29,7 +29,7 @@ public class ShipController : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-        if (gameManager.Unpaused()) {
+        if (!gameManager.isPaused) {
             anim.enabled = true;
             if (!isDocked) {
                 if (toTheLeft) {

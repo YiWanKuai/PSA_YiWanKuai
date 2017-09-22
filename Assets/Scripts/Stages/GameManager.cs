@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour {
 
@@ -8,14 +9,18 @@ public class GameManager : MonoBehaviour {
     public bool isCleared;
     public bool isTimeUp;
     public int timeLeft;
+    public GameObject canvas;
+    public GameObject timeUpScreen;
+    public GameObject musicManager;
 
     void Start() {
         StartCoroutine(StartCountdown());
     }
 
     void Update() {
-        if(timeLeft <= 0) {
+        if(timeLeft <= 0 && !isTimeUp) {
             isTimeUp = true;
+            StartCoroutine(TimeUp());
         }
     }
 
@@ -23,7 +28,7 @@ public class GameManager : MonoBehaviour {
         return (!isPaused && !isTimeUp && !isCleared);
     }
 
-    public IEnumerator StartCountdown() {
+    IEnumerator StartCountdown() {
         while (!isTimeUp) {
             if (!isPaused && !isCleared) {
                 yield return new WaitForSeconds(1.0f);
@@ -31,5 +36,13 @@ public class GameManager : MonoBehaviour {
             }
             yield return null;
         }
+    }
+
+    IEnumerator TimeUp() {
+        GameObject newCanvas = Instantiate(canvas) as GameObject;
+        GameObject createImage = Instantiate(timeUpScreen) as GameObject;
+        createImage.transform.SetParent(newCanvas.transform, false);
+        StartCoroutine(musicManager.GetComponent<MusicManager>().playLose());
+        yield return null;
     }
 }

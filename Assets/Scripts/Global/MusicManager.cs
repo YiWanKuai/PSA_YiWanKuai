@@ -27,10 +27,15 @@ public class MusicManager : MonoBehaviour {
         mixer.SetFloat("SFXVol", PlayerPrefs.GetFloat("SFXVol"));
 	}
 	
-	public void playLose () {
-        BGM.Stop();
+	public IEnumerator playLose () {
+        BGM.volume = 0f;
         loseClip.Play();
-	}
+        yield return new WaitWhile(() => loseClip.isPlaying);
+        while (BGM.volume < 1.0f) {
+            BGM.volume += Time.deltaTime;
+            yield return null;
+        }
+    }
 
     public void playClear() {
         BGM.Stop();
