@@ -48,6 +48,10 @@ public class ShipController : MonoBehaviour {
         }
 	}
 
+    public void SetDockTime(float f) {
+        dockTime = f;
+    }
+
     void OnTriggerEnter2D (Collider2D other) {
         if (other.tag.Equals("Port")) {
             isDocked = true;
