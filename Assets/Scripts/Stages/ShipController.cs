@@ -24,6 +24,7 @@ public class ShipController : MonoBehaviour {
             anim.SetTrigger("TurnLeft");
             toTheLeft = true;
         }
+        GetComponent<SpriteRenderer>().sortingOrder = toTheLeft ? 0 : -3;
 	}
 	
 	// Update is called once per frame
@@ -32,10 +33,10 @@ public class ShipController : MonoBehaviour {
             anim.enabled = true;
             if (!isDocked) {
                 if (toTheLeft) {
-                    rb.velocity = -moveSpeed * Axis.axis;
+                    rb.velocity = -moveSpeed * Statics.axis;
                 }
                 else {
-                    rb.velocity = moveSpeed * Axis.axis;
+                    rb.velocity = moveSpeed * Statics.axis;
                 }
             }
             else {

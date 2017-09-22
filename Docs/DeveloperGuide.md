@@ -16,17 +16,26 @@ Since git does not support viewing parts of a .unity (scene) file, it is hard to
 
 # For all moving objects in the stage
 
-In Update() and FixedUpdate() and LateUpdate(), only do stuff when GameManager.Unpaused() is true. <br>
 To correct angle of movement for ships, multiply movespeed by Axis.axis.
+
+# UI settings
+
+ALWAYS set scale mode to "scale with screen size" whenever possible (usually in Canvas for UI elements)
 
 # UI animations
 
 Since pause currently sets timescale to 0, animations that should still run when paused need their update mode to be set to unscaled time.
 
-# How to do things
+# UI popups
+
+Add the BlankCanvas prefab and the popup object into a GameObject that uses the following code:
+GameObject newCanvas = Instantiate(canvas) as GameObject; <br>
+GameObject createImage = Instantiate(popup) as GameObject; <br>
+createImage.transform.SetParent(newCanvas.transform, false);
+
+# Triggering events on touch
 
 To make something respond to a touch, you can add an Event Trigger or a Button component. Using Event Trigger, add a New Event Type, select the current object you want to call a function on, then choose a function to call from the scripts in the object. Note that the function to be called must be public. <br>
-ALWAYS set scale mode to "scale with screen size" whenever possible (usually in Canvas for UI elements)
 
 # Audio
 
