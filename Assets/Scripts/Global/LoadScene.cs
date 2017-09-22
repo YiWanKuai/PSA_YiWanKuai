@@ -4,20 +4,14 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class LoadScene : MonoBehaviour {
-
-    public string nameOfSceneToLoad;
-
-	// Use this for initialization
-	void Start () {
-		
-	}
 	
-    public void Load () {
+    public void Load (string nameOfSceneToLoad) {
+        Time.timeScale = 1f;
         SceneManager.LoadScene(nameOfSceneToLoad);
     }
 
-	// Update is called once per frame
-	void Update () {
-		
-	}
+    public void Reload() {
+        Time.timeScale = 1f;
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+    }
 }

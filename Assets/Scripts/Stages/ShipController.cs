@@ -24,18 +24,19 @@ public class ShipController : MonoBehaviour {
             anim.SetTrigger("TurnLeft");
             toTheLeft = true;
         }
+        GetComponent<SpriteRenderer>().sortingOrder = toTheLeft ? 0 : -3;
 	}
 	
 	// Update is called once per frame
 	void Update () {
-        if (gameManager.Unpaused()) {
+        if (!gameManager.isPaused) {
             anim.enabled = true;
             if (!isDocked) {
                 if (toTheLeft) {
-                    rb.velocity = -moveSpeed * Axis.axis;
+                    rb.velocity = -moveSpeed * Statics.axis;
                 }
                 else {
-                    rb.velocity = moveSpeed * Axis.axis;
+                    rb.velocity = moveSpeed * Statics.axis;
                 }
             }
             else {
@@ -46,6 +47,10 @@ public class ShipController : MonoBehaviour {
             anim.enabled = false;
         }
 	}
+
+    public void SetDockTime(float f) {
+        dockTime = f;
+    }
 
     void OnTriggerEnter2D (Collider2D other) {
         if (other.tag.Equals("Port")) {
