@@ -15,6 +15,8 @@ public class ShipController : MonoBehaviour {
     public bool toTheLeft;
     public float dockTime = 10f;
 
+    public GameObject cargo;
+
 	// Use this for initialization
 	void Start () {
         rb = GetComponent<Rigidbody2D>();
@@ -68,8 +70,10 @@ public class ShipController : MonoBehaviour {
         GameObject newTimer = (GameObject) Instantiate(timer, transform, false);
         ShipTimer timerScript = newTimer.GetComponent<ShipTimer>();
         timerScript.time = dockTime;
+        spawnCargo();
         yield return new WaitForSeconds(dockTime + 0.2f);
         toTheLeft = true;
+        destroyCargo();
         anim.SetTrigger("TurnLeft");
         yield return new WaitForSeconds(0.5f);
         isDocked = false;
@@ -86,5 +90,15 @@ public class ShipController : MonoBehaviour {
         yield return new WaitForSeconds(0.5f);
         isDocked = false;
         yield return new WaitForSeconds(2f);
+    }
+
+    void spawnCargo()
+    {
+        GameObject newCargo = Instantiate(cargo, this.gameObject.transform.GetChild(0).transform.position, this.gameObject.transform.GetChild(0).transform.rotation, transform) as GameObject;
+    }
+
+    void destroyCargo()
+    {
+        Destroy(this.gameObject.transform.GetChild(2).gameObject);
     }
 }
