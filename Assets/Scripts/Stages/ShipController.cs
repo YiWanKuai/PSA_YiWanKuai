@@ -70,10 +70,9 @@ public class ShipController : MonoBehaviour {
         GameObject newTimer = (GameObject) Instantiate(timer, transform, false);
         ShipTimer timerScript = newTimer.GetComponent<ShipTimer>();
         timerScript.time = dockTime;
-        spawnCargo();
+        //spawnCargo();
         yield return new WaitForSeconds(dockTime + 0.2f);
         toTheLeft = true;
-        destroyCargo();
         anim.SetTrigger("TurnLeft");
         yield return new WaitForSeconds(0.5f);
         isDocked = false;

@@ -74,7 +74,6 @@ public class GameManager : MonoBehaviour {
         
         if (currCargo != null)
         {
-            Debug.Log(cargo.gameObject.name);
         }
     }
 
