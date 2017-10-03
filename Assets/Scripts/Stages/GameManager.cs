@@ -15,10 +15,15 @@ public class GameManager : MonoBehaviour {
 
     private GameObject currCargo;
 
+	private int scoreToClear;
+	private int currentScore;
+
     Ray ray;
     RaycastHit rayHit;
 
     void Start() {
+		currentScore = 0;
+		scoreToClear = Statics.stageNumber * 0;
         StartCoroutine(StartCountdown());
     }
 
@@ -61,6 +66,10 @@ public class GameManager : MonoBehaviour {
         GameObject newCanvas = Instantiate(canvas) as GameObject;
         GameObject createImage = Instantiate(timeUpScreen) as GameObject;
         createImage.transform.SetParent(newCanvas.transform, false);
+		if (currentScore >= scoreToClear) {
+			PlayerPrefs.SetInt ("lastClearedStage", Statics.stageNumber + 1);
+			Statics.updateLastClearedStage ();
+		}
         StartCoroutine(musicManager.GetComponent<MusicManager>().playLose());
         yield return null;
     }
