@@ -13,6 +13,11 @@ public class GameManager : MonoBehaviour {
     public GameObject timeUpScreen;
     public GameObject musicManager;
 
+    private GameObject currCargo;
+
+    Ray ray;
+    RaycastHit rayHit;
+
     void Start() {
         StartCoroutine(StartCountdown());
     }
@@ -21,6 +26,20 @@ public class GameManager : MonoBehaviour {
         if(timeLeft <= 0 && !isTimeUp) {
             isTimeUp = true;
             StartCoroutine(TimeUp());
+        }
+        if (Input.GetMouseButtonDown(0))
+        {
+            ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+            if(Physics.Raycast(ray, out rayHit))
+            {
+                currCargo = rayHit.collider.gameObject;
+                Debug.Log("Im out");
+                if(currCargo != null)
+                {
+                    print(currCargo.name);
+                    Debug.Log("Im in");
+                }
+            }
         }
     }
 
@@ -44,5 +63,27 @@ public class GameManager : MonoBehaviour {
         createImage.transform.SetParent(newCanvas.transform, false);
         StartCoroutine(musicManager.GetComponent<MusicManager>().playLose());
         yield return null;
+    }
+
+    public void setCargo(GameObject cargo)
+    {
+        if (cargo.tag.Equals("Cargo"))
+        {
+            currCargo = cargo;
+        }
+        
+        if (currCargo != null)
+        {
+        }
+    }
+
+    public GameObject getCargo()
+    {
+        return currCargo;
+    }
+
+    public void resetCargo()
+    {
+        currCargo = null;
     }
 }

@@ -15,13 +15,15 @@ public class ShipController : MonoBehaviour {
     public bool toTheLeft;
     public float dockTime = 10f;
 
+    public GameObject cargo;
+
 	// Use this for initialization
 	void Start () {
         rb = GetComponent<Rigidbody2D>();
         gameManager = GameObject.FindGameObjectWithTag("GameController").GetComponent<GameManager>();
         anim = GetComponent<Animator>();
         if(transform.position.x > 0) {
-            anim.SetTrigger("TurnLeft");
+            //anim.SetTrigger("TurnLeft");
             toTheLeft = true;
         }
         GetComponent<SpriteRenderer>().sortingOrder = toTheLeft ? 0 : -3;
@@ -68,6 +70,7 @@ public class ShipController : MonoBehaviour {
         GameObject newTimer = (GameObject) Instantiate(timer, transform, false);
         ShipTimer timerScript = newTimer.GetComponent<ShipTimer>();
         timerScript.time = dockTime;
+        //spawnCargo();
         yield return new WaitForSeconds(dockTime + 0.2f);
         toTheLeft = true;
         anim.SetTrigger("TurnLeft");
@@ -86,5 +89,28 @@ public class ShipController : MonoBehaviour {
         yield return new WaitForSeconds(0.5f);
         isDocked = false;
         yield return new WaitForSeconds(2f);
+    }
+
+    void spawnCargo()
+    {
+        //GameObject newCargo = Instantiate(cargo, this.gameObject.transform.GetChild(0).transform.position, this.gameObject.transform.GetChild(0).transform.rotation, transform) as GameObject;
+    }
+
+    void destroyCargo()
+    {
+        Destroy(this.gameObject.transform.GetChild(2).gameObject);
+    }
+
+    private void OnMouseDown()
+    {
+        if (isDocked)
+        {
+            getCargo();
+        }  
+    }
+
+    void getCargo()
+    {
+        gameManager.setCargo(cargo);
     }
 }
