@@ -32,6 +32,7 @@ public class GameManager : MonoBehaviour {
             isTimeUp = true;
             StartCoroutine(TimeUp());
         }
+		/*
         if (Input.GetMouseButtonDown(0))
         {
             ray = Camera.main.ScreenPointToRay(Input.mousePosition);
@@ -46,6 +47,7 @@ public class GameManager : MonoBehaviour {
                 }
             }
         }
+        */
     }
 
     public bool Unpaused() {
