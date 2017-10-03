@@ -13,7 +13,12 @@ public class GameManager : MonoBehaviour {
     public GameObject timeUpScreen;
     public GameObject musicManager;
 
+	private int scoreToClear;
+	private int currentScore;
+
     void Start() {
+		currentScore = 0;
+		scoreToClear = Statics.stageNumber * 0;
         StartCoroutine(StartCountdown());
     }
 
@@ -42,6 +47,8 @@ public class GameManager : MonoBehaviour {
         GameObject newCanvas = Instantiate(canvas) as GameObject;
         GameObject createImage = Instantiate(timeUpScreen) as GameObject;
         createImage.transform.SetParent(newCanvas.transform, false);
+		PlayerPrefs.SetInt("lastClearedStage", Statics.stageNumber + 1);
+		Statics.updateLastClearedStage ();
         StartCoroutine(musicManager.GetComponent<MusicManager>().playLose());
         yield return null;
     }
