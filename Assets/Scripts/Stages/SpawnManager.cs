@@ -5,7 +5,7 @@ using UnityEngine;
 public class SpawnManager : MonoBehaviour {
 
     private GameManager gm;
-    public GameObject[] ships;
+    public GameObject[] ships; // for diff type of ships. ship[0] will be the normal ship
     public Transform[] leftSpawnPoints;
     public Transform[] rightSpawnPoints;
 
