@@ -36,6 +36,9 @@ public class GameManager : MonoBehaviour {
             isTimeUp = true;
             StartCoroutine(TimeUp());
         }
+        if (Input.GetKeyDown(KeyCode.Backslash)) {
+            PlayerPrefs.DeleteAll();
+        }
     }
 
     public bool Unpaused() {

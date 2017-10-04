@@ -34,7 +34,7 @@ public class ShipController : MonoBehaviour {
 		} else {
 			cargoCount = Random.Range (1, 5);
 			//0 is small container, 1 is medium container, 2 is large container
-			currCargo = generteNextCargo ();
+			currCargo = generateNextCargo ();
 			isOffloading = true;
 
 		}
@@ -120,13 +120,13 @@ public class ShipController : MonoBehaviour {
 		gameManager.contSource = "Ship";
 		cargoCount--;
 		if (cargoCount > 0) {
-			currCargo = generteNextCargo ();
+			currCargo = generateNextCargo ();
 		} else {
 			currCargo = -1;
 		}
     }
 
-	private int generteNextCargo() {
+	private int generateNextCargo() {
 		return Random.Range (1, 3);
 	}
 
