@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class ChangeStage : MonoBehaviour {
 
-    private int latestStageCleared = 10;
 
 	public void Previous() {
         if(Statics.stageNumber > 1) {
@@ -13,7 +12,7 @@ public class ChangeStage : MonoBehaviour {
     }
 
     public void Next() {
-        if (Statics.stageNumber < latestStageCleared) {
+        if (Statics.stageNumber < Statics.lastClearedStage) {
             Statics.stageNumber++;
         }
     }

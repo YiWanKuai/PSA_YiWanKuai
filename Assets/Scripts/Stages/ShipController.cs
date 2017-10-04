@@ -9,23 +9,35 @@ public class ShipController : MonoBehaviour {
     private Animator anim;
     private Rigidbody2D rb;
     private bool isDocked;
+	private bool isOffloading;
+	private int currCargo;
+	private int cargoCount;
+	private Stack<int> containers = new Stack<int> ();
 
     public GameObject timer;
     public float moveSpeed;
     public bool toTheLeft;
     public float dockTime = 10f;
 
-    public GameObject cargo;
+    
 
 	// Use this for initialization
 	void Start () {
         rb = GetComponent<Rigidbody2D>();
         gameManager = GameObject.FindGameObjectWithTag("GameController").GetComponent<GameManager>();
         anim = GetComponent<Animator>();
-        if(transform.position.x > 0) {
-            //anim.SetTrigger("TurnLeft");
-            toTheLeft = true;
-        }
+		if (transform.position.x > 0) {
+			isOffloading = false;
+			anim.SetTrigger ("TurnLeft");
+			cargoCount = 0;
+			toTheLeft = true;
+		} else {
+			cargoCount = Random.Range (1, 5);
+			//0 is small container, 1 is medium container, 2 is large container
+			currCargo = generteNextCargo ();
+			isOffloading = true;
+
+		}
         GetComponent<SpriteRenderer>().sortingOrder = toTheLeft ? 0 : -3;
 	}
 	
@@ -70,7 +82,6 @@ public class ShipController : MonoBehaviour {
         GameObject newTimer = (GameObject) Instantiate(timer, transform, false);
         ShipTimer timerScript = newTimer.GetComponent<ShipTimer>();
         timerScript.time = dockTime;
-        //spawnCargo();
         yield return new WaitForSeconds(dockTime + 0.2f);
         toTheLeft = true;
         anim.SetTrigger("TurnLeft");
@@ -88,29 +99,47 @@ public class ShipController : MonoBehaviour {
         anim.SetTrigger("TurnRight");
         yield return new WaitForSeconds(0.5f);
         isDocked = false;
+		gameManager.addScore(getScore());
         yield return new WaitForSeconds(2f);
     }
-
-    void spawnCargo()
-    {
-        //GameObject newCargo = Instantiate(cargo, this.gameObject.transform.GetChild(0).transform.position, this.gameObject.transform.GetChild(0).transform.rotation, transform) as GameObject;
-    }
-
-    void destroyCargo()
-    {
-        Destroy(this.gameObject.transform.GetChild(2).gameObject);
-    }
+		
 
     private void OnMouseDown()
     {
-        if (isDocked)
-        {
-            getCargo();
-        }  
+		if (isDocked && isOffloading && (cargoCount > 0)) {
+			getCargo ();
+		} else if (isDocked && !isOffloading && (gameManager.getCargo() != null) && (gameManager.contSource != "Ship")) {
+			addCargo (gameManager.getCargoType());
+			gameManager.resetCargo ();
+		}
     }
 
-    void getCargo()
+    private void getCargo()
     {
-        gameManager.setCargo(cargo);
+        gameManager.setCargo(currCargo);
+		gameManager.contSource = "Ship";
+		cargoCount--;
+		if (cargoCount > 0) {
+			currCargo = generteNextCargo ();
+		} else {
+			currCargo = -1;
+		}
     }
+
+	private int generteNextCargo() {
+		return Random.Range (1, 3);
+	}
+
+	private void addCargo(int cargo) {
+		containers.Push (cargo);
+	}
+
+	public int getScore() {
+		int sum = 0;
+		while (containers.Count != 0) {
+			sum += containers.Pop ();
+		}
+		Debug.Log (sum);
+		return sum;
+	}
 }
