@@ -36,6 +36,10 @@ To make something respond to a touch, you can add an Event Trigger or a Button c
 Do not use .mp3 files. Use .wav or .ogg because mp3 files have a latency in Unity. <br>
 When adding an Audio Source, select the output to be BGM or SFX group in the audio mixer. This is for ease of volume control.
 
+# PlayerPrefs
+
+Press '\' to delete all PlayerPrefs.
+
 # Testing the game on Android
 
 Follow steps in this link https://unity3d.com/learn/tutorials/topics/mobile-touch/building-your-unity-game-android-device-testing
