@@ -40,6 +40,11 @@ When adding an Audio Source, select the output to be BGM or SFX group in the aud
 
 Press '\' to delete all PlayerPrefs.
 
+# Debug Room
+
+This scene is for use in Unity Editor only. Do NOT add this scene to build settings. <br>
+To use it, just type in intended last cleared stage number and press enter.
+
 # Testing the game on Android
 
 Follow steps in this link https://unity3d.com/learn/tutorials/topics/mobile-touch/building-your-unity-game-android-device-testing
