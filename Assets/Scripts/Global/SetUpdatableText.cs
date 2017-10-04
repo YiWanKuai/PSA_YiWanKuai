@@ -20,6 +20,9 @@ public class SetUpdatableText : MonoBehaviour {
             case "StageNumber":
                 text.text = Statics.stageNumber.ToString();
                 break;
+			case "Score": 
+				text.text = GameObject.FindGameObjectWithTag ("GameController").GetComponent<GameManager> ().getCurrScore ().ToString ();
+				break;
             default:
                 text.text = textToSet;
                 break;

@@ -9,21 +9,25 @@ public class GameManager : MonoBehaviour {
     public bool isCleared;
     public bool isTimeUp;
     public int timeLeft;
+	public string contSource = null;
     public GameObject canvas;
     public GameObject timeUpScreen;
     public GameObject musicManager;
+	public GameObject cargoLarge;
+	public GameObject cargoMedium;
 
-    private GameObject currCargo;
+    private int currCargo;
 
 	private int scoreToClear;
 	private int currentScore;
+
 
     Ray ray;
     RaycastHit rayHit;
 
     void Start() {
 		currentScore = 0;
-		scoreToClear = Statics.stageNumber * 0;
+		scoreToClear = Statics.stageNumber * 1;
         StartCoroutine(StartCountdown());
     }
 
@@ -32,22 +36,6 @@ public class GameManager : MonoBehaviour {
             isTimeUp = true;
             StartCoroutine(TimeUp());
         }
-		/*
-        if (Input.GetMouseButtonDown(0))
-        {
-            ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-            if(Physics.Raycast(ray, out rayHit))
-            {
-                currCargo = rayHit.collider.gameObject;
-                Debug.Log("Im out");
-                if(currCargo != null)
-                {
-                    print(currCargo.name);
-                    Debug.Log("Im in");
-                }
-            }
-        }
-        */
     }
 
     public bool Unpaused() {
@@ -76,25 +64,44 @@ public class GameManager : MonoBehaviour {
         yield return null;
     }
 
-    public void setCargo(GameObject cargo)
-    {
-        if (cargo.tag.Equals("Cargo"))
-        {
-            currCargo = cargo;
-        }
-        
-        if (currCargo != null)
-        {
-        }
+    public void setCargo(int cargo)
+    {	
+      	currCargo = cargo;
+		Debug.Log ("current cargo" + currCargo);
     }
 
     public GameObject getCargo()
-    {
-        return currCargo;
+    {	
+		GameObject cargo = null;
+		switch (currCargo) {
+		case 0:
+			break;
+		case 1:
+			cargo = cargoMedium;
+			break;
+		case 2:
+			cargo = cargoLarge;
+			break;
+		}
+		return cargo;
     }
+
+	public int getCargoType() {
+		return currCargo;
+	}
 
     public void resetCargo()
     {
-        currCargo = null;
+        currCargo = -1;
+		Debug.Log ("current cargo" + currCargo);
     }
+
+	public void addScore(int score) {
+		currentScore += score;
+		Debug.Log (currentScore);
+	}
+
+	public int getCurrScore(){
+		return currentScore;
+	}
 }
