@@ -15,6 +15,7 @@ public class ShipController : MonoBehaviour {
 	private Stack<int> containers = new Stack<int> ();
 
     public GameObject timer;
+    public GameObject cargoSpeechBubble;
     public float moveSpeed;
     public bool toTheLeft;
     public float dockTime = 10f;
@@ -81,6 +82,7 @@ public class ShipController : MonoBehaviour {
     IEnumerator StartUnloading() {
         GameObject newTimer = (GameObject) Instantiate(timer, transform, false);
         ShipTimer timerScript = newTimer.GetComponent<ShipTimer>();
+        GameObject speechBubble = (GameObject)Instantiate(cargoSpeechBubble, transform, false);
         timerScript.time = dockTime;
         yield return new WaitForSeconds(dockTime + 0.2f);
         toTheLeft = true;
@@ -142,4 +144,8 @@ public class ShipController : MonoBehaviour {
 		Debug.Log (sum);
 		return sum;
 	}
+
+    public int getCurrCargo() {
+        return currCargo;
+    }
 }
