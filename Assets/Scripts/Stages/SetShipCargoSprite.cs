@@ -31,5 +31,8 @@ public class SetShipCargoSprite : MonoBehaviour {
                 this.transform.parent.gameObject.SetActive(false);
                 break;
         }
+        if (sc.toTheLeft) {
+            this.transform.parent.gameObject.SetActive(false);
+        }
     }
 }

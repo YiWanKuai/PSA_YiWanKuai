@@ -82,7 +82,7 @@ public class ShipController : MonoBehaviour {
     IEnumerator StartUnloading() {
         GameObject newTimer = (GameObject) Instantiate(timer, transform, false);
         ShipTimer timerScript = newTimer.GetComponent<ShipTimer>();
-        GameObject speechBubble = (GameObject)Instantiate(cargoSpeechBubble, transform, false);
+        Instantiate(cargoSpeechBubble, transform, false);
         timerScript.time = dockTime;
         yield return new WaitForSeconds(dockTime + 0.2f);
         toTheLeft = true;
