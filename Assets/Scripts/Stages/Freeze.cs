@@ -19,7 +19,7 @@ public class Freeze : MonoBehaviour {
 	// Update is called once per frame
 	IEnumerator StartFreezeGame () {
         gm.isFrozen = true;
-        yield return new WaitForSeconds(PlayerPrefs.GetInt("FreezeLevel") + 5f);
+        yield return new WaitForSeconds(PlayerPrefs.GetInt("freezeLevel") + 5f);
         gm.isFrozen = false;
 	}
 }

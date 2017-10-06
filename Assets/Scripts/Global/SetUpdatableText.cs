@@ -23,6 +23,9 @@ public class SetUpdatableText : MonoBehaviour {
 			case "Score": 
 				text.text = GameObject.FindGameObjectWithTag ("GameController").GetComponent<GameManager> ().getCurrScore ().ToString ();
 				break;
+            case "FreezeLevel":
+                text.text = Statics.freezeLevel.ToString();
+                break;
             default:
                 text.text = textToSet;
                 break;
