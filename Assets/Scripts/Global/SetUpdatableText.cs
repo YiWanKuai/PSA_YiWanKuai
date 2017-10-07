@@ -15,7 +15,7 @@ public class SetUpdatableText : MonoBehaviour {
     void Update() {
         switch (textToSet) {
             case "Timer":
-                text.text = GameObject.FindGameObjectWithTag("GameController").GetComponent<GameManager>().timeLeft.ToString();
+                text.text = GameObject.FindGameObjectWithTag("GameController").GetComponent<GameManager>().timeLeft.ToString("F0");
                 break;
             case "StageNumber":
                 text.text = Statics.stageNumber.ToString();
@@ -23,6 +23,9 @@ public class SetUpdatableText : MonoBehaviour {
 			case "Score": 
 				text.text = GameObject.FindGameObjectWithTag ("GameController").GetComponent<GameManager> ().getCurrScore ().ToString ();
 				break;
+            case "FreezeLevel":
+                text.text = Statics.freezeLevel.ToString();
+                break;
             default:
                 text.text = textToSet;
                 break;

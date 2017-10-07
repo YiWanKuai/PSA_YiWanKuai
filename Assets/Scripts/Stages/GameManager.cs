@@ -8,7 +8,8 @@ public class GameManager : MonoBehaviour {
     public bool isPaused;
     public bool isCleared;
     public bool isTimeUp;
-    public int timeLeft;
+    public bool isFrozen;
+    public float timeLeft;
 	public string contSource = null;
     public GameObject canvas;
     public GameObject timeUpScreen;
@@ -47,9 +48,9 @@ public class GameManager : MonoBehaviour {
 
     IEnumerator StartCountdown() {
         while (!isTimeUp) {
-            if (!isPaused && !isCleared) {
-                yield return new WaitForSeconds(1.0f);
-                timeLeft--;
+            if (!isPaused && !isCleared && !isFrozen) {
+                yield return new WaitForSeconds(0.1f);
+                timeLeft -= 0.1f;
             }
             yield return null;
         }
