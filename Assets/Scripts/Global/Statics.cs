@@ -8,4 +8,14 @@ public static class Statics {
 
     public static int stageNumber = 1;
     public static Vector2 axis = new Vector2(Mathf.Cos(rawAngle * convertToRad), Mathf.Sin(-rawAngle * convertToRad));
+
+	public static int lastClearedStage = (PlayerPrefs.HasKey("lastClearedStage")) ? PlayerPrefs.GetInt("lastClearedStage") : 1;
+    public static int freezeLevel = (PlayerPrefs.HasKey("freezeLevel")) ? PlayerPrefs.GetInt("freezeLevel") : 1;
+
+    public static void updateLastClearedStage() {
+		lastClearedStage = PlayerPrefs.GetInt ("lastClearedStage");
+    }
+    public static void updateFreezeLevel() {
+        freezeLevel = PlayerPrefs.GetInt("freezeLevel");
+    }
 }

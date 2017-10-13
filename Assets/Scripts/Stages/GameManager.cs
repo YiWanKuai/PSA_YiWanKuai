@@ -8,12 +8,27 @@ public class GameManager : MonoBehaviour {
     public bool isPaused;
     public bool isCleared;
     public bool isTimeUp;
-    public int timeLeft;
+    public bool isFrozen;
+    public float timeLeft;
+	public string contSource = null;
     public GameObject canvas;
     public GameObject timeUpScreen;
     public GameObject musicManager;
+	public GameObject cargoLarge;
+	public GameObject cargoMedium;
+
+    private int currCargo;
+
+	private int scoreToClear;
+	private int currentScore;
+
+
+    Ray ray;
+    RaycastHit rayHit;
 
     void Start() {
+		currentScore = 0;
+		scoreToClear = Statics.stageNumber * 1;
         StartCoroutine(StartCountdown());
     }
 
@@ -21,6 +36,9 @@ public class GameManager : MonoBehaviour {
         if(timeLeft <= 0 && !isTimeUp) {
             isTimeUp = true;
             StartCoroutine(TimeUp());
+        }
+        if (Input.GetKeyDown(KeyCode.Backslash)) {
+            PlayerPrefs.DeleteAll();
         }
     }
 
@@ -30,9 +48,9 @@ public class GameManager : MonoBehaviour {
 
     IEnumerator StartCountdown() {
         while (!isTimeUp) {
-            if (!isPaused && !isCleared) {
-                yield return new WaitForSeconds(1.0f);
-                timeLeft--;
+            if (!isPaused && !isCleared && !isFrozen) {
+                yield return new WaitForSeconds(0.1f);
+                timeLeft -= 0.1f;
             }
             yield return null;
         }
@@ -42,7 +60,52 @@ public class GameManager : MonoBehaviour {
         GameObject newCanvas = Instantiate(canvas) as GameObject;
         GameObject createImage = Instantiate(timeUpScreen) as GameObject;
         createImage.transform.SetParent(newCanvas.transform, false);
+		if (currentScore >= scoreToClear) {
+			PlayerPrefs.SetInt ("lastClearedStage", Statics.stageNumber + 1);
+			Statics.updateLastClearedStage ();
+		}
         StartCoroutine(musicManager.GetComponent<MusicManager>().playLose());
         yield return null;
     }
+
+    public void setCargo(int cargo)
+    {	
+      	currCargo = cargo;
+		Debug.Log ("current cargo" + currCargo);
+    }
+
+    public GameObject getCargo()
+    {	
+		GameObject cargo = null;
+		switch (currCargo) {
+		case 0:
+			break;
+		case 1:
+			cargo = cargoMedium;
+			break;
+		case 2:
+			cargo = cargoLarge;
+			break;
+		}
+		return cargo;
+    }
+
+	public int getCargoType() {
+		return currCargo;
+	}
+
+    public void resetCargo()
+    {
+        currCargo = -1;
+		Debug.Log ("current cargo" + currCargo);
+    }
+
+	public void addScore(int score) {
+		currentScore += score;
+		Debug.Log (currentScore);
+	}
+
+	public int getCurrScore(){
+		return currentScore;
+	}
 }
