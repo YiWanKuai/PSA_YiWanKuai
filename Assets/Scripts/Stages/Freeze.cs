@@ -8,6 +8,7 @@ public class Freeze : MonoBehaviour {
     private GameManager gm;
     private Text text;
     private Image image;
+	private int coolDown = 15;
 
     // Use this for initialization
     void Start () {
@@ -24,14 +25,22 @@ public class Freeze : MonoBehaviour {
 	// Update is called once per frame
 	IEnumerator StartFreezeGame () {
         gm.isFrozen = true;
-        int waitTime = PlayerPrefs.GetInt("freezeLevel") + 5;
-        image.color = Color.gray;
+		int waitTime = PlayerPrefs.GetInt("standardizeLevel") + 5;
+		int rechargeTime = coolDown;
+        image.color = Color.yellow;
         while(waitTime > 0) {
             text.text = waitTime.ToString();
             yield return new WaitForSeconds(1f);
             waitTime--;
         }
+		gm.isFrozen = false;
+		image.color = Color.gray;
+		while (rechargeTime > 0) {
+			text.text = rechargeTime.ToString ();
+			yield return new WaitForSeconds (1f);
+			rechargeTime--;
+		}
         image.color = Color.white;
-        gm.isFrozen = false;
+		text.text = "";
 	}
 }

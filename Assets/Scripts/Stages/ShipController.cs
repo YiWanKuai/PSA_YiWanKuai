@@ -35,7 +35,6 @@ public class ShipController : MonoBehaviour {
 		} else {
 			cargoCount = Random.Range (1, 5);
 			//0 is small container, 1 is medium container, 2 is large container
-			currCargo = generateNextCargo ();
 			isOffloading = true;
 
 		}
@@ -71,6 +70,7 @@ public class ShipController : MonoBehaviour {
         if (other.tag.Equals("Port")) {
             isDocked = true;
             if (!toTheLeft) { // collided when moving right
+				currCargo = generateNextCargo ();
                 StartCoroutine(StartUnloading());
             }
             else {
@@ -129,11 +129,18 @@ public class ShipController : MonoBehaviour {
     }
 
 	private int generateNextCargo() {
+		if (gameManager.isStandardized) {
+			return 2;
+		}
 		return Random.Range (1, 3);
 	}
 
 	private void addCargo(int cargo) {
 		containers.Push (cargo);
+	}
+
+	public string getcargoCount() {
+		return cargoCount.ToString();
 	}
 
 	public int getScore() {

@@ -26,6 +26,9 @@ public class SetUpdatableText : MonoBehaviour {
             case "FreezeLevel":
                 text.text = Statics.freezeLevel.ToString();
                 break;
+			case "StandardizeLevel":
+				text.text = Statics.standardizeLevel.ToString ();
+				break;
             default:
                 text.text = textToSet;
                 break;
