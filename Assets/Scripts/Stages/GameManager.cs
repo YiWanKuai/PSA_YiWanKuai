@@ -9,6 +9,7 @@ public class GameManager : MonoBehaviour {
     public bool isCleared;
     public bool isTimeUp;
     public bool isFrozen;
+	public bool isStandardized;
     public float timeLeft;
 	public string contSource = null;
     public GameObject canvas;
@@ -30,6 +31,8 @@ public class GameManager : MonoBehaviour {
 		currentScore = 0;
 		scoreToClear = Statics.stageNumber * 1;
         StartCoroutine(StartCountdown());
+		isFrozen = false;
+		isStandardized = false;
     }
 
     void Update() {
