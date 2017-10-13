@@ -136,6 +136,10 @@ public class ShipController : MonoBehaviour {
 		containers.Push (cargo);
 	}
 
+	public string getcargoCount() {
+		return cargoCount.ToString();
+	}
+
 	public int getScore() {
 		int sum = 0;
 		while (containers.Count != 0) {
