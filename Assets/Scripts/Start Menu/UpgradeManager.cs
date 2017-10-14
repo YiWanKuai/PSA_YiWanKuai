@@ -16,8 +16,14 @@ public class UpgradeManager : MonoBehaviour {
 
     public void UpgradeFreeze() {
         PlayerPrefs.SetInt("freezeLevel", (PlayerPrefs.HasKey("freezeLevel") ? PlayerPrefs.GetInt("freezeLevel") + 1 : 2));
+
         Statics.updateFreezeLevel();
     }
+
+	public void UpgradeStandardize() {
+		PlayerPrefs.SetInt("standardizeLevel", (PlayerPrefs.HasKey("standardizeLevel") ? PlayerPrefs.GetInt("standardizeLevel") + 1 : 2));
+		Statics.updateStandardizeLevel ();
+	}
 
 	// Use this for initialization
 	void Start () {
