@@ -15,7 +15,12 @@ public class MusicManager : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
         audioSources = GetComponents<AudioSource>();
-        BGM = audioSources[0];
+        if (Statics.stageNumber % 5 == 0) {
+            BGM = audioSources[3];
+        }
+        else {
+            BGM = audioSources[0];
+        }
         if (audioSources.Length > 1) {
             loseClip = audioSources[1];
         }
