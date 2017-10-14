@@ -34,25 +34,25 @@ public class SpawnManager : MonoBehaviour {
             go = Instantiate(ships[0], leftSpawnPoints[0]) as GameObject;
             go.SendMessage("SetDockTime", 5);
             yield return new WaitForSeconds(1f);
-            go = Instantiate(ships[0], rightSpawnPoints[0]) as GameObject;
+            go = Instantiate(ships[1], rightSpawnPoints[0]) as GameObject;
             go.SendMessage("SetDockTime", 5);
             yield return new WaitForSeconds(10f);
             go = Instantiate(ships[0], leftSpawnPoints[0]) as GameObject;
             go.SendMessage("SetDockTime", 5);
             yield return new WaitForSeconds(1f);
-            go = Instantiate(ships[0], rightSpawnPoints[0]) as GameObject;
+            go = Instantiate(ships[1], rightSpawnPoints[0]) as GameObject;
             go.SendMessage("SetDockTime", 2);
             yield return new WaitForSeconds(10f);
             go = Instantiate(ships[0], leftSpawnPoints[0]) as GameObject;
             go.SendMessage("SetDockTime", 5);
             yield return new WaitForSeconds(1f);
-            go = Instantiate(ships[0], rightSpawnPoints[0]) as GameObject;
+            go = Instantiate(ships[1], rightSpawnPoints[0]) as GameObject;
             go.SendMessage("SetDockTime", 2);
             yield return new WaitForSeconds(10f);
             go = Instantiate(ships[0], leftSpawnPoints[0]) as GameObject;
             go.SendMessage("SetDockTime", 5);
             yield return new WaitForSeconds(1f);
-            go = Instantiate(ships[0], rightSpawnPoints[0]) as GameObject;
+            go = Instantiate(ships[1], rightSpawnPoints[0]) as GameObject;
             go.SendMessage("SetDockTime", 2);
         }
         else {
