@@ -155,4 +155,9 @@ public class ShipController : MonoBehaviour {
     public int getCurrCargo() {
         return currCargo;
     }
+
+    public bool getDockStatus()
+    {
+        return isDocked;
+    }
 }
