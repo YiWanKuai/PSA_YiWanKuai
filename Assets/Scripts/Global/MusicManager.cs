@@ -37,8 +37,13 @@ public class MusicManager : MonoBehaviour {
         }
     }
 
-    public void playClear() {
+    public IEnumerator playClear() {
         BGM.Stop();
         clearClip.Play();
+        yield return new WaitWhile(() => clearClip.isPlaying);
+        while (BGM.volume < 1.0f) {
+            BGM.volume += Time.deltaTime;
+            yield return null;
+        }
     }
 }
