@@ -21,7 +21,7 @@ public class Pause : MonoBehaviour {
         GameObject createImage = Instantiate(pauseMenu) as GameObject;
         createImage.transform.SetParent(newCanvas.transform, false);
         gameManager = GameObject.FindGameObjectWithTag("GameController").GetComponent<GameManager>();
-        if (!gameManager.isCleared && !gameManager.isTimeUp) {
+        if (!gameManager.isTimeUp) {
             Time.timeScale = 0f;
         }
         gameManager.isPaused = true;
