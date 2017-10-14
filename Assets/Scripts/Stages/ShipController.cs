@@ -29,7 +29,7 @@ public class ShipController : MonoBehaviour {
         anim = GetComponent<Animator>();
 		if (transform.position.x > 0) {
 			isOffloading = false;
-			anim.SetTrigger ("TurnLeft");
+			//anim.SetTrigger ("TurnLeft");
 			cargoCount = 0;
 			toTheLeft = true;
 		} else {
