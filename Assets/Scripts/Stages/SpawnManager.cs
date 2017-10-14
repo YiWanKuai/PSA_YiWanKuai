@@ -17,7 +17,7 @@ public class SpawnManager : MonoBehaviour {
     }
 	
     void Update() {
-        if(gm.isTimeUp || gm.isCleared) {
+        if(gm.isTimeUp) {
             StopCoroutine("Spawn");
         }
     }
