@@ -25,9 +25,13 @@ public class TrailBehaviour : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
         if (!this.gameObject.GetComponent<ShipController>().getDockStatus() && isLeaving == false)
-        {   
-            anim1.SetTrigger("Move");
-            anim2.SetTrigger("Move");
+        {
+            if (anim1.isActiveAndEnabled) {
+                anim1.SetTrigger("Move");
+            }
+            if (anim2.isActiveAndEnabled) {
+                anim2.SetTrigger("Move");
+            }
         }
         if(this.gameObject.GetComponent<ShipController>().getDockStatus() && isLeaving == false)
         {
@@ -37,7 +41,9 @@ public class TrailBehaviour : MonoBehaviour {
         if(!this.gameObject.GetComponent<ShipController>().getDockStatus() && isLeaving == true)
         {
             trail2.SetActive(true);
-            anim2.SetTrigger("Move");
+            if (anim2.isActiveAndEnabled) {
+                anim2.SetTrigger("Move");
+            }
             isLeaving = false;
         }
 	}
