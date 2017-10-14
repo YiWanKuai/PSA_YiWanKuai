@@ -63,11 +63,14 @@ public class GameManager : MonoBehaviour {
         GameObject newCanvas = Instantiate(canvas) as GameObject;
         GameObject createImage = Instantiate(timeUpScreen) as GameObject;
         createImage.transform.SetParent(newCanvas.transform, false);
-		if (currentScore >= scoreToClear) {
-			PlayerPrefs.SetInt ("lastClearedStage", Statics.stageNumber + 1);
-			Statics.updateLastClearedStage ();
-		}
-        StartCoroutine(musicManager.GetComponent<MusicManager>().playLose());
+        if (currentScore >= scoreToClear) {
+            PlayerPrefs.SetInt("lastClearedStage", Statics.stageNumber + 1);
+            Statics.updateLastClearedStage();
+            StartCoroutine(musicManager.GetComponent<MusicManager>().playClear());
+        }
+        else {
+            StartCoroutine(musicManager.GetComponent<MusicManager>().playLose());
+        }
         yield return null;
     }
 
