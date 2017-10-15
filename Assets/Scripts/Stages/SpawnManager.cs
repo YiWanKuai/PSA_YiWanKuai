@@ -5,7 +5,7 @@ using UnityEngine;
 public class SpawnManager : MonoBehaviour {
 
     private GameManager gm;
-    public GameObject[] ships; // for diff type of ships. ship[0] will be the normal ship
+    public GameObject[] ships; // for diff type of ships. ship[0] will be the normal ship, 2 is for boss ship
     public Transform[] leftSpawnPoints;
     public Transform[] rightSpawnPoints;
 
@@ -30,37 +30,42 @@ public class SpawnManager : MonoBehaviour {
 
     IEnumerator Spawn() {
         GameObject go;
-        if (Statics.stageNumber <= 5) {  //Stages 1 to 5
-            go = Instantiate(ships[0], leftSpawnPoints[0]) as GameObject;
-            go.SendMessage("SetDockTime", 5);
-            yield return new WaitForSeconds(1f);
-            go = Instantiate(ships[1], rightSpawnPoints[0]) as GameObject;
-            go.SendMessage("SetDockTime", 5);
-            yield return new WaitForSeconds(10f);
-            go = Instantiate(ships[0], leftSpawnPoints[0]) as GameObject;
-            go.SendMessage("SetDockTime", 5);
-            yield return new WaitForSeconds(1f);
-            go = Instantiate(ships[1], rightSpawnPoints[0]) as GameObject;
-            go.SendMessage("SetDockTime", 2);
-            yield return new WaitForSeconds(10f);
-            go = Instantiate(ships[0], leftSpawnPoints[0]) as GameObject;
-            go.SendMessage("SetDockTime", 5);
-            yield return new WaitForSeconds(1f);
-            go = Instantiate(ships[1], rightSpawnPoints[0]) as GameObject;
-            go.SendMessage("SetDockTime", 2);
-            yield return new WaitForSeconds(10f);
-            go = Instantiate(ships[0], leftSpawnPoints[0]) as GameObject;
-            go.SendMessage("SetDockTime", 5);
-            yield return new WaitForSeconds(1f);
-            go = Instantiate(ships[1], rightSpawnPoints[0]) as GameObject;
-            go.SendMessage("SetDockTime", 2);
-        }
+		if (Statics.stageNumber < 5) {  //Stages 1 to 5
+			go = Instantiate (ships [0], leftSpawnPoints [0]) as GameObject;
+			go.SendMessage ("SetDockTime", 5);
+			yield return new WaitForSeconds (1f);
+			go = Instantiate (ships [1], rightSpawnPoints [0]) as GameObject;
+			go.SendMessage ("SetDockTime", 5);
+			yield return new WaitForSeconds (10f);
+			go = Instantiate (ships [0], leftSpawnPoints [0]) as GameObject;
+			go.SendMessage ("SetDockTime", 5);
+			yield return new WaitForSeconds (1f);
+			go = Instantiate (ships [1], rightSpawnPoints [0]) as GameObject;
+			go.SendMessage ("SetDockTime", 2);
+			yield return new WaitForSeconds (10f);
+			go = Instantiate (ships [0], leftSpawnPoints [0]) as GameObject;
+			go.SendMessage ("SetDockTime", 5);
+			yield return new WaitForSeconds (1f);
+			go = Instantiate (ships [1], rightSpawnPoints [0]) as GameObject;
+			go.SendMessage ("SetDockTime", 2);
+			yield return new WaitForSeconds (10f);
+			go = Instantiate (ships [0], leftSpawnPoints [0]) as GameObject;
+			go.SendMessage ("SetDockTime", 5);
+			yield return new WaitForSeconds (1f);
+			go = Instantiate (ships [1], rightSpawnPoints [0]) as GameObject;
+			go.SendMessage ("SetDockTime", 2);
+		} else if (Statics.stageNumber % 5 == 0) {
+			go = Instantiate (ships [2], leftSpawnPoints [0]) as GameObject;
+			go.SendMessage ("SetDockTime", 10);
+			yield return new WaitForSeconds (1f);
+
+		}
         else {
             while (true) {
                 go = Instantiate(ships[0], leftSpawnPoints[0]) as GameObject;
                 go.SendMessage("SetDockTime", 5);
                 yield return new WaitForSeconds(1f);
-                go = Instantiate(ships[0], rightSpawnPoints[0]) as GameObject;
+                go = Instantiate(ships[1], rightSpawnPoints[0]) as GameObject;
                 go.SendMessage("SetDockTime", 5);
                 yield return new WaitForSeconds(10f);
             }
