@@ -43,7 +43,7 @@ public class MusicManager : MonoBehaviour {
     }
 
     public IEnumerator playClear() {
-        BGM.Stop();
+		BGM.volume = 0f;
         clearClip.Play();
         yield return new WaitWhile(() => clearClip.isPlaying);
         while (BGM.volume < 1.0f) {

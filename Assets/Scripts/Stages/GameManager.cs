@@ -83,8 +83,9 @@ public class GameManager : MonoBehaviour {
 		if (Statics.stageNumber == Statics.lastClearedStage) {
 			PlayerPrefs.SetInt ("lastClearedStage", Statics.stageNumber + 1);
 			Statics.updateLastClearedStage ();
-			Statics.stageNumber++;
+
 		}
+		Statics.stageNumber++;
         StartCoroutine(musicManager.GetComponent<MusicManager>().playClear());
         yield return null;
     }
