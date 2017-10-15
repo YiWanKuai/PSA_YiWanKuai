@@ -118,9 +118,9 @@ public class ShipController : MonoBehaviour {
 
     private void OnMouseDown()
     {
-		if (isDocked && isOffloading && (cargoCount > 0) && (gameManager.getCargo() == null)) {
+		if (isDocked && isOffloading && (cargoCount > 0) && (gameManager.getCargo() == null) && (!gameManager.isPaused)) {
 			getCargo ();
-		} else if (isDocked && !isOffloading && (gameManager.getCargo() != null) && (gameManager.contSource != "Ship")) {
+		} else if (isDocked && !isOffloading && (gameManager.getCargo() != null) && (gameManager.contSource != "Ship") && (!gameManager.isPaused)) {
 			addCargo (gameManager.getCargoType());
 			gameManager.resetCargo ();
 		}
