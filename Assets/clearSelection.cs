@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class standardize : MonoBehaviour {
+public class clearSelection : MonoBehaviour {
 
 	private GameManager gm;
 	private Text text;
@@ -17,12 +17,12 @@ public class standardize : MonoBehaviour {
 		image = GetComponent<Image>();
 	}
 
-	public void StandardizeGame() {
-		if (gm.Unpaused () && !gm.isStandardized) {
-			StartCoroutine (StartStandardizeGame ());
-		}
+	public void ClearGame() {
+		if (gm.Unpaused ())
+			gm.resetCargo ();
+		//StartCoroutine(StartStandardizeGame());
 	}
-
+	/*
 	IEnumerator StartStandardizeGame () {
 		gm.isStandardized = true;
 		int waitTime = PlayerPrefs.GetInt("freezeLevel") + 5;
@@ -43,4 +43,5 @@ public class standardize : MonoBehaviour {
 		image.color = Color.white;
 		text.text = "";
 	}
+	*/
 }

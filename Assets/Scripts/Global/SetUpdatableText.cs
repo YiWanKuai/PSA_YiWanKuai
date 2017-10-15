@@ -17,6 +17,9 @@ public class SetUpdatableText : MonoBehaviour {
             case "Timer":
                 text.text = GameObject.FindGameObjectWithTag("GameController").GetComponent<GameManager>().timeLeft.ToString("F0");
                 break;
+			case "Goal":
+				text.text = GameObject.FindGameObjectWithTag ("GameController").GetComponent<GameManager> ().scoreToClear.ToString ();
+				break;
             case "StageNumber":
                 text.text = Statics.stageNumber.ToString();
                 break;

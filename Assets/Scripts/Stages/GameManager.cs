@@ -20,7 +20,7 @@ public class GameManager : MonoBehaviour {
 
     private int currCargo;
 
-	private int scoreToClear;
+	public int scoreToClear;
 	private int currentScore;
 
 
@@ -29,7 +29,10 @@ public class GameManager : MonoBehaviour {
 
     void Start() {
 		currentScore = 0;
-		scoreToClear = Statics.stageNumber * 1;
+		scoreToClear = Statics.stageNumber * 2;
+		if(Statics.stageNumber % 5 == 0 ){
+			scoreToClear = 15 + ((Statics.stageNumber - 5));
+		}
         Debug.Log(scoreToClear);
         StartCoroutine(StartCountdown());
 		isFrozen = false;
@@ -77,9 +80,11 @@ public class GameManager : MonoBehaviour {
         GameObject newCanvas = Instantiate(canvas) as GameObject;
         GameObject createImage = Instantiate(clearScreen) as GameObject;
         createImage.transform.SetParent(newCanvas.transform, false);
-        PlayerPrefs.SetInt("lastClearedStage", Statics.stageNumber + 1);
-        Statics.updateLastClearedStage();
-        Statics.stageNumber++;
+		if (Statics.stageNumber == Statics.lastClearedStage) {
+			PlayerPrefs.SetInt ("lastClearedStage", Statics.stageNumber + 1);
+			Statics.updateLastClearedStage ();
+			Statics.stageNumber++;
+		}
         StartCoroutine(musicManager.GetComponent<MusicManager>().playClear());
         yield return null;
     }
